@@ -5,10 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .triangle .item {
+            width: 0;
+            height: 0;
+            border: 50px solid transparent;
+            margin-bottom: 20px;
+        }
+
+        /* 四角 */
+        .triangle .square {
+            width: 0;
+            height: 0;
+            border: 50px solid transparent;
+            border-top: 50px solid red;
+            border-bottom: 50px solid rgb(163, 215, 20);
+            border-left: 50px solid rgb(0, 255, 187);
+            border-right: 50px solid rgb(33, 21, 202);
+            margin-bottom: 20px;
+
+        }
+
+        /* 倒三角 */
+        .triangle .item.triangle-top {
+            border-top-color: red;
+        }
+
+        
+        .triangle .item.triangle-bottom {
+            border-bottom-color: rgb(163, 215, 20);
+        }
+
+        .triangle .item.triangle-left {
+            border-left-color: rgb(0, 255, 187);
+        }
+
+        .triangle .item.triangle-right {
+            border-right-color: rgb(33, 21, 202);
+        }
+    </style>
 </head>
 
 <body>
-    222
+    <div class="triangle">
+        <div class="square"></div>
+        <div class="item triangle-top"></div>
+        <div class="item triangle-bottom"></div>
+        <div class="item triangle-left"></div>
+        <div class="item triangle-right"></div>
+    </div>
 </body>
 
 </html>
