@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .line {
+            width: 100%;
+        }
+
+        .half-pixel-line .item-one .line {
+            height: 1px;
+            background: none;
+            box-shadow: 0 0.5px 0 #000;
+        }
+
+        .half-pixel-line .item-two .line {
+            height: 1px;
+            background: #000;
+            transform: scaleY(0.5);
+            transform-origin: 0 0;
+            /* 设置变换原点为左上角 */
+            margin-bottom: 20px;
+        }
+
+        .half-pixel-line .item-three .dashed-line {
+            height: 1px;
+            /* 渐变 */
+            background: linear-gradient(to right, #000 50%, transparent 50%);
+            background-size: 4px 1px;
+            transform: scaleY(0.5);
+        }
+
+        .half-pixel-line .item-three .line {
+            height: 1px;
+            background-image: -webkit-linear-gradient(top, transparent 50%, #000 50%);
+            background-image: linear-gradient(to bottom, transparent 50%, #000 50%);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 半像素线 -->
+    <div class="half-pixel-line">
+        <h2>0.5px线</h2>
+        <div class="item-one">
+            <p>方式1: 利用box-shadow</p>
+            <div class="line"></div>
+        </div>
+        <div class="item-two">
+            <p>方式2: 利用transform: scaleY(0.5)</p>
+            <div class="line"></div>
+        </div>
+        <div class="item-three">
+            <p>方式3: 渐变</p>
+            <div class="line"></div>
+            <div class="dashed-line"></div>
+
+        </div>
+    </div>
+</body>
+
+</html>
