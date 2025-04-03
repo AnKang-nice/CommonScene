@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {}
+
+        .practice {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            filter: contrast(20);
+            background-color: #fff;
+            padding: 100px;
+        }
+
+        .ball-item {
+            border-radius: 50%;
+            filter: blur(10px);
+        }
+
+        .practice .ball-one {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(80, 162, 154);
+            transform: translate(-50px);
+            animation: 2s movingBallOne linear infinite alternate;
+        }
+
+        .practice .ball-two {
+            width: 88px;
+            height: 88px;
+            background-color: rgb(30, 191, 153);
+            /* transform: translate(-50px); */
+            animation: 2s movingBallTwo linear infinite alternate;
+
+        }
+
+        @keyframes movingBallOne {
+            0% {
+                transform: translate(-50px)
+            }
+
+            100% {
+                transform: translate(100px)
+            }
+        }
+
+        @keyframes movingBallTwo {
+            100% {
+                transform: translate(-80px)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 主要利用css滤镜 -->
+         <h2>css滤镜</h2>
+        <div class="practice">
+            <div class="ball-item ball-one"></div>
+            <div class="ball-item ball-two"></div>
+        </div>
+
+        <div class="charger-container">
+            <!-- 球 -->
+            <div class="ball">
+                <!-- 数字显示 -->
+            </div>
+            <!-- 充电 -->
+            <div class="charge">
+
+            </div>
+        </div>
+</body>
+
+</html>
