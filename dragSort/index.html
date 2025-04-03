@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .drag-sort {}
+
+        .drag-sort .list .item {
+            margin-bottom: 5px;
+            padding: 10px;
+            background-color: beige;
+        }
+
+        .drag-sort .list .item.moving {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="drag-sort">
+        <h2>拖拽排序</h2>
+        <ul class="list">
+            <li draggable="true" class="item">1</li>
+            <li draggable="true" class="item">2</li>
+            <li draggable="true" class="item">3</li>
+            <li draggable="true" class="item">4</li>
+            <li draggable="true" class="item">5</li>
+            <li draggable="true" class="item">6</li>
+            <li draggable="true" class="item">7</li>
+        </ul>
+    </div>
+
+    <script>
+        let source = null; // 拖拽源
+        let list = document.querySelector('.list');
+
+        list.addEventListener('dragstart', function (e) {
+
+            console.log('开始拖拽', e.target);
+            // 拖拽开始  设置拖拽元素的样式
+            setTimeout(function () {
+                e.target.classList.add('moving');
+            }, 0);
+            source = e.target;
+            e.dataTransfer.effectAllowed = 'move'; // 设置拖拽效果
+
+        });
+        list.addEventListener('dragover', function (e) {
+            console.log('拖拽中', e.target);
+            e.preventDefault(); // 阻止默认行为，允许拖拽元素放置
+
+
+        }, false);
+        list.addEventListener('dragenter', function (e) {
+            console.log('拖拽进入', e.target);
+            // e.preventDefault(); // 阻止默认行为
+            if (!source) {
+                return;
+            }
+            // 判断位置  若位置发生变化，交换位置
+            let endTarget = e.target;
+            // 若拖拽源和目标元素不同 && 目标元素是item，交换位置
+            if (source !== endTarget && endTarget.classList.contains('item')) {
+                // 交换位置
+                let sourceIndex = Array.from(list.children).indexOf(source);
+                let endIndex = Array.from(list.children).indexOf(endTarget);
+                if (sourceIndex < endIndex) {
+                    // 如果拖拽源在目标元素之前  说明是向下  插入到目标元素后面
+                    list.insertBefore(endTarget, source);
+                } else {
+                    // 如果拖拽源在目标元素之后  说明是向上  插入到目标元素前面
+                    list.insertBefore(source, endTarget);
+                }
+            }
+
+        });
+        list.addEventListener('dragleave', function (e) {
+            console.log('拖拽离开', e.target);
+        })
+        list.addEventListener('dragend', function (e) {
+            console.log('拖拽结束', e.target);
+            // 清空moving类
+            let items = document.querySelectorAll('.item');
+            for (let i = 0; i < items.length; i++) {
+                items[i].classList.remove('moving');
+            }
+        })
+    </script>
+</body>
+
+</html>
