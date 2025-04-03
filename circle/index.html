@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .circle-container {}
+
+        .circle-container .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+            margin-bottom: 20px;
+        }
+
+        .circle-container .half-circle {
+            width: 100px;
+            height: 50px;
+            border-radius: 50px 50px 0 0;
+            background-color: rgb(163, 215, 20);
+            margin-bottom: 20px;
+        }
+
+        .circle-container .sector {
+            width: 0;
+            height: 0;
+            border: 50px solid transparent;
+            border-top: 50px solid rgb(0, 255, 187);
+            border-radius: 50px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="circle-container">
+        <h2>绘制圆形、半圆、扇形</h2>
+        <div class="circle"></div>
+        <div class="half-circle"></div>
+        <div class="sector"></div>
+    </div>
+</body>
+
+</html>

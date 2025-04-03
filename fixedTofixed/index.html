@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fixed-to-fixed {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .fixed-to-fixed .item {
+            height: 100vh;
+        }
+
+        .fixed-to-fixed .left {
+            background-color: red;
+            width: 200px;
+            flex-shrink: 0;
+        }
+
+        .fixed-to-fixed .right {
+            background-color: rgb(30, 0, 255);
+            width: 200px;
+            flex-shrink: 0;
+        }
+
+        .fixed-to-fixed .middle {
+            flex: 1;
+            min-width: 200px;
+            background-color: pink;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>固比固布局</h2>
+    </div>
+    <div class="fixed-to-fixed">
+        <div class="item left"></div>
+        <div class="item middle"></div>
+        <div class="item right"></div>
+    </div>
+</body>
+
+</html>
