@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {}
+
+        .container .item {
+            width: 50px;
+            height: 50px;
+            background-color: salmon;
+        }
+
+        .container .raf {
+            width: 50px;
+            height: 50px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="item"></div>
+        <button class="timer">定时器动画</button>
+        <div class="raf"></div>
+        <button class="rafBtn">requestAnimationFrame动画</button>
+    </div>
+    <script>
+
+        // 模拟高负载
+        function heavyTask() {
+            let sum = 0;
+            for (let i = 0; i < 10000000; i++) sum += Math.random();
+        }
+
+        const item = document.querySelector('.item');
+        const rafItem = document.querySelector('.raf');
+        const rafBtn = document.querySelector('.rafBtn');
+        const timerBtn = document.querySelector('.timer');
+
+        let timerId = null;
+        let rafId = null;
+
+        let rafIndex = 0;
+        function animate() {
+            heavyTask(); // 模拟高负载
+            rafItem.style.transform = `translateX(${rafIndex * 100}px)`;
+
+            rafIndex++;
+
+
+            rafId = requestAnimationFrame(animate);
+        }
+
+        timerBtn.addEventListener('click', () => {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+                item.style.transform = '';
+            } else {
+                let index = 0
+                timerId = setInterval(() => {
+                    heavyTask(); // 模拟高负载
+                    item.style.transform = `translateX(${index * 100}px)`;
+                    index++;
+                }, 1000 / 60);
+            }
+
+
+        });
+
+        rafBtn.addEventListener('click', () => {
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+                rafItem.style.transform = '';
+                rafIndex = 0;
+            } else {
+                animate();
+            }
+        });
+    </script>
+</body>
+
+</html>
