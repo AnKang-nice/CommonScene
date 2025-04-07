@@ -8,10 +8,21 @@
     <!-- icon -->
     <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg" type="image/svg+xml">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         .header {
+            position: fixed;
             display: flex;
             justify-content: flex-start;
             align-items: center;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 10px 20px;
         }
 
         .logan {
@@ -27,12 +38,12 @@
         }
 
         .container {
-            width: 100%;
-            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
+            width: 100%;
+            margin-top: 60px;
         }
 
         .item {
