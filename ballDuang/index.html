@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        .ball {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 30% 30%,
+                    #fff, #ddd, #aaa, #666);
+            box-shadow:
+                0px 0px 10px rgba(0, 0, 0, 0.1),
+                0px 0px 20px rgba(0, 0, 0, 0.2),
+                0px 0px 30px rgba(0, 0, 0, 0.3),
+                0px 0px 40px rgba(0, 0, 0, 0.4),
+                0px 0px 50px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="ball"></div>
+    </div>
+    <script>
+        // 随机函数
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // 随机速度
+
+        // 获取小球元素
+        const ball = document.querySelector('.ball');
+
+        // 获取视口宽度和高度
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        // 获取小球宽高
+        const ballWidth = ball.offsetWidth;
+        const ballHeight = ball.offsetHeight;
+
+        // 限制位置
+        const maxX = viewportWidth - ballWidth;
+        const maxY = viewportHeight - ballHeight;
+
+        // 设置小球的初始位置
+        let posX = 0;
+        let posY = 0;
+
+        // 设置小球的移动方向
+        let dirX = 1;
+        let dirY = 1;
+
+        // 设置小球的移动速度
+        let speed = 3;
+
+
+
+        // 动画函数
+        function animate() {
+            posX += dirX * speed;
+            posY += dirY * speed;
+
+
+
+            // 检查小球是否碰到边界   切换随机颜色
+            if (posX > maxX || posX < 0) {
+                dirX *= -1;
+                ball.style.backgroundColor = `rgb(${random(0, 255)}, ${random(0, 200)}, ${random(0, 255)})`;
+
+            }
+            if (posY > maxY || posY < 0) {
+                dirY *= -1;
+                ball.style.backgroundColor = `rgb(${random(0, 200)}, ${random(0, 255)}, ${random(0, 255)})`;
+
+            }
+
+            // 更新小球的位置
+            ball.style.left = posX + 'px';
+            ball.style.top = posY + 'px';
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .note-con {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 300px;
+            background-color: antiquewhite;
+        }
+
+        .header {
+            width: 100%;
+            height: 20px;
+            background-color: #eed386;
+            cursor: move;
+        }
+
+        .note-move {
+            width: 100%;
+            height: 200px;
+            background-color: #f2dda3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="note-con">
+        <div class="header"></div>
+        <div class="note-move" contenteditable>随记</div>
+    </div>
+    <script>
+        // 获取header元素
+        const header = document.querySelector('.header');
+        // 获取note-con元素
+        const noteCon = document.querySelector('.note-con');
+
+        let moveId = null;
+        // 动画函数
+        const animate = function (left, top) {
+            noteCon.style.left = left + 'px';
+            noteCon.style.top = top + 'px';
+            moveId = requestAnimationFrame(animate);
+        }
+
+
+        // 监听鼠标按下事件
+        header.onmousedown = function (e) {
+            // 获取视口宽度
+            let viewWidth = document.documentElement.clientWidth;
+            // 获取视口高度
+            let viewHeight = document.documentElement.clientHeight;
+            // 获取元素宽
+            let noteConWidth = noteCon.offsetWidth;
+            // 获取元素高
+            let noteConHeight = noteCon.offsetHeight;
+            // 获取元素的最大坐标
+            let maxX = viewWidth - noteConWidth;
+            let maxY = viewHeight - noteConHeight;
+
+            // 获取初始鼠标坐标
+            let x = e.clientX;
+            let y = e.clientY;
+            // 获取note-con元素的坐标
+            let noteConRect = noteCon.getBoundingClientRect();
+            // 获取note-con元素的初始坐标
+            let noteConX = noteConRect.left;
+            let noteConY = noteConRect.top;
+
+            // 鼠标相对于note-con元素的坐标
+            let offsetX = x - noteConX;
+            let offsetY = y - noteConY;
+
+            // 监听鼠标移动事件(监听document)
+            document.onmousemove = function (e) {
+                // 获取鼠标坐标
+                let x = e.clientX;
+                let y = e.clientY;
+                // 计算新的坐标
+                let newX = x - offsetX;
+                let newY = y - offsetY;
+
+                // 边界条件
+                // 如果新的坐标小于0，则设置为0
+                if (newX < 0) {
+                    newX = 0;
+                }
+                if (newY < 0) {
+                    newY = 0;
+                }
+                if (newX > maxX) {
+                    newX = maxX;
+                }
+                if (newY > maxY) {
+                    newY = maxY;
+                }
+                // 设置note-con元素的新坐标
+                noteCon.style.left = newX + 'px';
+                noteCon.style.top = newY + 'px';
+            }
+            // 监听鼠标松开事件
+            document.onmouseup = function () {
+                // 移除鼠标移动和鼠标松开事件的监听
+                document.onmousemove = null;
+                document.onmouseup = null;
+
+                cancelAnimationFrame(moveId);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
