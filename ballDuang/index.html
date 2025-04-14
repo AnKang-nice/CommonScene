@@ -31,12 +31,31 @@
                 0px 0px 40px rgba(0, 0, 0, 0.4),
                 0px 0px 50px rgba(0, 0, 0, 0.5);
         }
+
+        .ball-two {
+            width: 60px;
+            height: 60px;
+            background-color: pink;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle at 30% 30%,
+                    #fff, #ddd, #aaa, #666);
+            box-shadow:
+                0px 0px 10px rgba(0, 0, 0, 0.1),
+                0px 0px 20px rgba(0, 0, 0, 0.2),
+                0px 0px 30px rgba(0, 0, 0, 0.3),
+                0px 0px 40px rgba(0, 0, 0, 0.4),
+                0px 0px 50px rgba(0, 0, 0, 0.6);
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="ball"></div>
+        <div class="ball-two"></div>
     </div>
     <script>
         // 随机函数
@@ -48,6 +67,7 @@
 
         // 获取小球元素
         const ball = document.querySelector('.ball');
+        const ballTwo = document.querySelector('.ball-two');
 
         // 获取视口宽度和高度
         const viewportWidth = window.innerWidth;
@@ -56,46 +76,73 @@
         // 获取小球宽高
         const ballWidth = ball.offsetWidth;
         const ballHeight = ball.offsetHeight;
+        const ballTwoWidth = ballTwo.offsetWidth;
+        const ballTwoHeight = ballTwo.offsetHeight;
 
         // 限制位置
         const maxX = viewportWidth - ballWidth;
         const maxY = viewportHeight - ballHeight;
+        const maxXTwo = viewportWidth - ballTwoWidth;
+        const maxYTwo = viewportHeight - ballTwoHeight;
 
         // 设置小球的初始位置
         let posX = 0;
         let posY = 0;
 
+        let posXTwo = random(0, maxXTwo);
+        let posYTwo = random(0, maxYTwo);
+
         // 设置小球的移动方向
         let dirX = 1;
         let dirY = 1;
+
+        let dirTwoX = -1;
+        let dirTwoY = 1;
 
         // 设置小球的移动速度
         let speed = 3;
 
 
 
-        // 动画函数
+        // 动画函数  TODO 再抽函数
         function animate() {
             posX += dirX * speed;
             posY += dirY * speed;
 
+            posXTwo += dirTwoX * speed;
+            posYTwo += dirTwoY * speed;
 
 
             // 检查小球是否碰到边界   切换随机颜色
             if (posX > maxX || posX < 0) {
                 dirX *= -1;
-                ball.style.backgroundColor = `rgb(${random(0, 255)}, ${random(0, 200)}, ${random(0, 255)})`;
-
             }
             if (posY > maxY || posY < 0) {
                 dirY *= -1;
-                ball.style.backgroundColor = `rgb(${random(0, 200)}, ${random(0, 255)}, ${random(0, 255)})`;
-
             }
+
+            if (posXTwo > maxXTwo || posXTwo < 0) {
+                dirTwoX *= -1;
+            }
+            if (posYTwo > maxYTwo || posYTwo < 0) {
+                dirTwoY *= -1;
+            }
+
+            // 如果两球发生碰撞  全部反向
+            if (Math.abs(posX - posXTwo) < ballWidth && Math.abs(posY - posYTwo) < ballHeight) {
+                dirX *= -1;
+                dirY *= -1;
+                dirTwoX *= -1;
+                dirTwoY *= -1;
+            }
+
 
             // 更新小球的位置
             ball.style.left = posX + 'px';
             ball.style.top = posY + 'px';
+
+            ballTwo.style.left = posXTwo + 'px';
+            ballTwo.style.top = posYTwo + 'px';
 
             requestAnimationFrame(animate);
         }

@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         .container {}
 
         .practice {
@@ -54,27 +60,227 @@
                 transform: translate(-80px)
             }
         }
+
+
+        .charger-container {
+            position: relative;
+            width: 375px;
+            height: 600px;
+            background-color: #000000;
+            margin: 0 auto;
+            filter: contrast(20);
+        }
+
+        .charger-container .ball {
+            width: 150px;
+            height: 150px;
+            background-color: rgb(80, 162, 154);
+            border-radius: 50%;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            margin-left: -75px;
+            filter: blur(8px);
+
+            animation: circleRotate 5s linear infinite;
+        }
+
+        .charger-container .ball::before {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background-color: cyan;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 38% 27% 87% 57% / 80%;
+        }
+
+        .charger-container .ball::after {
+            content: '';
+            width: 96px;
+            height: 96px;
+            background-color: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        @keyframes circleRotate {
+            0% {
+                transform: rotate(0);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .bubble-origin {
+            width: 120px;
+            height: 40px;
+            background-color: rgb(80, 162, 154);
+            border-radius: 120px 120px 0 0;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -60px;
+            filter: blur(6px);
+        }
+
+        .bubble-list {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -60px;
+            width: 120px;
+            height: 100%;
+            /* overflow: hidden; */
+        }
+
+        .bubble-list .item {
+            width: 20px;
+            height: 20px;
+            background-color: rgb(80, 162, 154);
+            border-radius: 46% 55%;
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            z-index: 22px;
+            margin-left: -10px;
+            animation: bubbleMove 2s ease-in-out infinite, circleRotate 5s linear infinite;
+            filter: blur(6px);
+
+        }
+
+        .bubble-list .item:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            left: 50%;
+            animation-duration: 5s;
+            animation-delay: 3s;
+        }
+
+        .bubble-list .item:nth-child(2) {
+            width: 25px;
+            height: 25px;
+            left: 38%;
+            animation-duration: 4s;
+            animation-delay: 1s;
+        }
+
+        .bubble-list .item:nth-child(3) {
+            width: 26px;
+            height: 26px;
+            left: 46%;
+            animation-duration: 2s;
+            animation-delay: 2s;
+        }
+
+        .bubble-list .item:nth-child(4) {
+            width: 36px;
+            height: 36px;
+            left: 60%;
+            animation-duration: 4s;
+            animation-delay: 1s;
+        }
+
+        .bubble-list .item:nth-child(5) {
+            width: 28px;
+            height: 28px;
+            left: 65%;
+            animation-duration: 3s;
+            animation-delay: 0s;
+        }
+
+        .bubble-list .item:nth-child(6) {
+            width: 34px;
+            height: 34px;
+            left: 53%;
+            animation-duration: 3s;
+            animation-delay: 2s;
+        }
+
+        .bubble-list .item:nth-child(7) {
+            width: 33px;
+            height: 33px;
+            left: 35%;
+            animation-duration: 5s;
+            animation-delay: 0s;
+        }
+
+        .bubble-list .item:nth-child(8) {
+            width: 29px;
+            height: 29px;
+            left: 54%;
+            animation-duration: 4s;
+            animation-delay: 4s;
+        }
+
+        @keyframes bubbleMove {
+            0% {
+                bottom: 0;
+            }
+
+            100% {
+                bottom: calc(80% - 150px);
+            }
+        }
+
+        .number {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 37%;
+            left: 50%;
+            z-index: 666;
+            margin-left: -50px;
+            margin-top: -50px;
+            text-align: center;
+            font-size: 26px;
+            color: #fff;
+            font-weight: 600;
+        }
     </style>
 </head>
 
 <body>
+    <!-- 问题拆解
+    1. 中心部分充电球  有数字显示   有动画
+    2. 底部中间位置，不断的冒出球形泡泡   
+    3. 泡泡上移动   与充电球融合
+    4. 融合完成 充电球数字增加0.1 
+    -->
     <div class="container">
         <!-- 主要利用css滤镜 -->
-         <h2>css滤镜</h2>
+        <h2>css滤镜</h2>
         <div class="practice">
             <div class="ball-item ball-one"></div>
             <div class="ball-item ball-two"></div>
         </div>
 
         <div class="charger-container">
+            <div class="number">66.8%</div>
             <!-- 球 -->
             <div class="ball">
                 <!-- 数字显示 -->
-            </div>
-            <!-- 充电 -->
-            <div class="charge">
 
             </div>
+            <!-- 充电 -->
+            <div class="bubble-list">
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+            </div>
+            <div class="bubble-origin"></div>
         </div>
 </body>
 
