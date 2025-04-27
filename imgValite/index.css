@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 400px;
+  /* height: 400px; */
+  margin: 100px auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.container .refresh {
+  width: 100%;
+  height: 22px;
+  color: aqua;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  font-size: 22px;
+}
+.img-container {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.title {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.img-box {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background-image: url("./t89ee-m1jbs.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px #ccc;
+}
+
+.block {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  opacity: 0.3;
+}
+
+.empty {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  background-color: #fff;
+  top: 30px;
+}
+
+.slider {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  margin-top: 5px;
+}
+
+.slider-btn {
+  width: 20px;
+  height: 20px;
+  background-color: #812f2f;
+  /* 鼠标滑动样式 */
+  cursor: grabbing;
+}
+
+.slider-text {
+  background-color: #ccc;
+  flex: 1;
+  text-align: center;
+}

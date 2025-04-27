@@ -5,19 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
-    <!-- 图片拖动验证 -->
-    <div class="imgValite">
-        <h2>图片拖动验证</h2>
-        <div class="imgValite-container">
-            <div>点击刷新</div>
-            <div class="img-con">
-                <img src="" alt="">
-                <div>滑块条</div>
+    <div class="container">
+        <div class="refresh">点击刷新</div>
+        <div class="img-container">
+            <div class="title">请进行滑动验证操作</div>
+            <div class="img-box">
+                <div class="block"></div>
+                <div class="empty"></div>
+            </div>
+            <div class="slider">
+                <button class="slider-btn"></button>
+                <div class="slider-text">按住滑动</div>
             </div>
         </div>
+    </div>
+    <script src="./index.js"></script>
 </body>
 
 </html>
