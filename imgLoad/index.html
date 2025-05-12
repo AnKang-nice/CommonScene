@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preload" as="image" href="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/1.jpg"
+        type="image/jpeg">
+    <link rel="preload" as="image" href="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/2.jpg"
+        type="image/jpeg">
+    <link rel="preload" as="image" href="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/3.jpg"
+        type="image/jpeg">
+    <script>
+        console.log('开始解析 HTML');
+        window.addEventListener('load', () => {
+            console.log('load 触发：所有资源加载完成');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOMContentLoaded：DOM 和 CSSOM 准备好');
+            // 此时渲染树已生成，页面已可见
+        });
+
+        requestAnimationFrame(() => {
+            console.log('即将渲染或重绘：render tree 已完成');
+
+        });
+
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="demo"></div>
+    <img class="img" src="  https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/1.jpg" loading="lazy"
+        alt="">
+    <img src="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/2.jpg" loading="lazy" alt="">
+    <img src="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/3.jpg" loading="lazy" alt="">
+    <img src="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/4.jpg" loading="lazy" alt="">
+    <img src="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/5.jpg" loading="lazy" alt="">
+    <img src="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/6.jpg" loading="lazy" alt="">
+    <img src="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/7.jpg" loading="lazy" alt="">
+    <img src="https://ankang-blog-img.oss-cn-beijing.aliyuncs.com/myBlogImg/20250512/8.jpg" loading="lazy" alt="">
+
+</body>
+
+</html>
