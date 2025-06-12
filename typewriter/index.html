@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .input-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        #dynamic-input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: transparent;
+            outline: none;
+        }
+
+        .cursor {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input-container">
+        <input type="text" id="dynamic-input" readonly>
+    </div>
+
+    <script>
+        const input = document.getElementById("dynamic-input");
+        const cursor = document.querySelector(".cursor");
+
+        const phrases = [
+            "用无代码搭建企业官网",
+            "用无代码开发CRM系统",
+            "用无代码实现自动化流程",
+            "用无代码创建数据看板"
+        ];
+        let currentPhraseIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100; // 打字速度（毫秒）
+
+        let timer = null
+        let status = false
+
+        function type() {
+            const currentPhrase = phrases[currentPhraseIndex];
+
+            if (isDeleting) {
+                // 删除模式：从后往前逐个删除
+                input.value = currentPhrase.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+
+                if (currentCharIndex === 0) {
+                    typingSpeed = 100; // 打字速度恢复正常
+                    isDeleting = false;
+                    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length; // 切换到下一句
+                }
+            } else {
+                // 打字模式：从前往后逐个显示
+                input.value = currentPhrase.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+
+                if (currentCharIndex === currentPhrase.length) {
+                    clearTimeout(timer); // 清除定时器，避免重复触发
+                    status = true; // 设置状态为true，表示已完成打字
+                    // 等一会再开始删除
+                    setTimeout(() => {
+                        isDeleting = true;
+                        typingSpeed = 50; // 删除速度可以更快
+                        status = false; // 设置状态为false，表示开始删除
+                        type(); // 调用type函数以开始删除
+                        // 重新启动定时器
+                    }, 1000); // 等待1秒后开始删除
+                }
+            }
+            timer = !status && setTimeout(type, typingSpeed);
+        }
+
+        // 启动动画
+        setTimeout(type, 1000); // 延迟1秒开始
+    </script>
+</body>
+
+
+</html>
